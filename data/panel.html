@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<script type="application/javascript;version=1.8">
+  addon.port.on("populate",  (json) => {
+    json = JSON.parse(json);
+    let div = document.querySelector("div");
+    div.innerHTML = "";
+
+    for (let i of json) {
+      let button = document.createElement("button");
+      button.textContent = i.label;
+      button.onclick = () => addon.port.emit("click", i.id);
+      button.setAttribute("style", "background-image: url(" + i.image + ")");
+      div.appendChild(button);
+    }
+  });
+</script>
+
+<style>
+  button {
+    opacity: 0.8;
+    background-repeat: no-repeat;
+    background-position: 0 16px;
+    border-width: 0;
+    text-align: left;
+    padding: 16px;
+    display: block;
+  }
+
+  button:hover {
+    opacity: 1;
+  }
+
+</style>
+
+<div></div>
